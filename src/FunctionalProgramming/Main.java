@@ -86,6 +86,7 @@ public class Main {
         
         Predicate<Integer> evenPredicate = getIntegerPredicate();
         System.out.println(evenPredicate.test(10));
+        List<Integer> listOfNumbers = List.of(1,2,3);
     }
 
     private static Predicate<Integer> getIntegerPredicate() {
