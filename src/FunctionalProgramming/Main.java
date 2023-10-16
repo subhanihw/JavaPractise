@@ -6,8 +6,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-class PalindromePredicate implements Predicate<Integer> {
-
+class PalindromePredicate implements Predicate<Integer>
+{
     @Override
     public boolean test(Integer num) {
         String number = num.toString();
@@ -16,16 +16,16 @@ class PalindromePredicate implements Predicate<Integer> {
     }
 }
 
-class PrintOutConsumer implements Consumer<Integer> {
-
+class PrintOutConsumer implements Consumer<Integer>
+{
     @Override
     public void accept(Integer integer) {
         System.out.println(integer);
     }
 }
 
-class NumberSquare implements Function<Integer, Integer> {
-
+class NumberSquare implements Function<Integer, Integer>
+{
     @Override
     public Integer apply(Integer integer) {
         return integer*integer;
@@ -86,7 +86,6 @@ public class Main {
         
         Predicate<Integer> evenPredicate = getIntegerPredicate();
         System.out.println(evenPredicate.test(10));
-        List<Integer> listOfNumbers = List.of(1,2,3);
     }
 
     private static Predicate<Integer> getIntegerPredicate() {
