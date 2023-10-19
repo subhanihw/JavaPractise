@@ -21,13 +21,19 @@ class Task2 implements Runnable
 }
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Task1 task1 = new Task1();
-        task1.start();
+        task1.setPriority(1);
+        task1.start() ;
 
         Task2 task2 = new Task2();
-        Thread thread = new Thread(task2);
-        thread.start();
+        Thread task2Thread = new Thread(task2);
+        task2Thread.setPriority(10);
+        task2Thread.start();
+
+        // wait for task1 and task2 completed. After that execute task 3
+        task1.join();
+        task2Thread.join();
 
         System.out.println("\nTask 3 Started");
         IntStream.range(301, 401).forEach(s -> System.out.print(s + " "));

@@ -1,9 +1,14 @@
+import java.util.stream.IntStream;
+
 class Main
 {
     public static void main (String[]args)
     {
-        System.out.println(findFactor(220));
-        System.out.println(findFactor(284));
+//        System.out.println(findFactor(220));
+//        System.out.println(findFactor(284));
+        int n = 10;
+        IntStream.range(1, 11).forEach(ele -> System.out.println(ele + " x " + n + " = " + (ele * n)));
+
     }
 
     static int findFactor (int n)
