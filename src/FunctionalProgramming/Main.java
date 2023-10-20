@@ -83,13 +83,19 @@ public class Main {
 //        Stream.of(1,2,3,4,5,6)
 //                .map(new NumberSquare())
 //                .forEach(Main::printNumber);
-        
-        Predicate<Integer> evenPredicate = getIntegerPredicate();
-        System.out.println(evenPredicate.test(10));
+//        Predicate<Integer> evenPredicate = getIntegerPredicate();
+//        System.out.println(evenPredicate.test(10));
+        Predicate<Integer> evenPredicate = n -> n % 2 == 0;
+        Stream.of(1,2,3,4,5,6).filter(evenPredicate.negate()).forEach(System.out::println);
+        Stream.of(1,2,3,4,5,6).filter(Predicate.not(Main::isEven)).forEach(System.out::println);
     }
 
     private static Predicate<Integer> getIntegerPredicate() {
         return n -> n % 2 == 0;
+    }
+
+    private static boolean isEven(int n) {
+        return  n % 2 == 0;
     }
 
     public static void printNumber(Integer num) {

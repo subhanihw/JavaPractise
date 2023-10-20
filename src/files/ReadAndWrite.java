@@ -10,14 +10,18 @@ import java.util.List;
 public class ReadAndWrite {
     public static void main(String[] args) throws IOException {
         Path path = Paths.get("./resources/data.txt");
-
 //        List<String> lines = Files.readAllLines(path);
 //        System.out.println(lines);
-
 //        Files.lines(path).map(String::toLowerCase).filter(str -> str.contains("uchiha")).forEach(System.out::println);
         Path writePath = Paths.get("./resources/writeFile.txt");
         List<String> list =List.of("Naruto", "Sasuke", "Kakashi", "Itachi");
         Files.write(writePath, list);
+
+        String fileContent = Files.readString(writePath);
+        String newContent = fileContent.replace("Naruto", "Naruto Uzumaki");
+
+        Path newFilePath = Paths.get("./resources/writeFile-2.txt");
+        Files.writeString(newFilePath, newContent);
 
     }
 }
