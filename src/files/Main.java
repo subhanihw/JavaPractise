@@ -9,9 +9,10 @@ import java.util.function.BiPredicate;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Files.list(Paths.get(".")).forEach(System.out::println);
-        Files.walk(Paths.get("."), 3).forEach(System.out::println);
-        Files.walk(Paths.get("."), 3)
+        Path dir = Paths.get(".");
+        Files.list(dir).forEach(System.out::println);
+        Files.walk(dir, 3).forEach(System.out::println);
+        Files.walk(dir, 3)
                 .filter(path -> String.valueOf(path).contains(".java"))
                 .forEach(System.out::println);
         BiPredicate<Path, BasicFileAttributes> directoryMatcher = ((path, attributes) -> attributes.isDirectory());
