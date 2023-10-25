@@ -1,13 +1,17 @@
 package FunctionalProgramming;
 
+import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-class PalindromePredicate implements Predicate<Integer>
-{
+class PalindromePredicate implements Predicate<Integer> {
     @Override
     public boolean test(Integer num) {
         String number = num.toString();
@@ -16,19 +20,17 @@ class PalindromePredicate implements Predicate<Integer>
     }
 }
 
-class PrintOutConsumer implements Consumer<Integer>
-{
+class PrintOutConsumer implements Consumer<Integer> {
     @Override
     public void accept(Integer integer) {
         System.out.println(integer);
     }
 }
 
-class NumberSquare implements Function<Integer, Integer>
-{
+class NumberSquare implements Function<Integer, Integer> {
     @Override
     public Integer apply(Integer integer) {
-        return integer*integer;
+        return integer * integer;
     }
 }
 
@@ -78,7 +80,7 @@ class Student {
 }
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 //        List<String> list = new ArrayList<>(List.of("Naruto", "Kakashi", "Itachi"));
 //        // Basic method to print
 //        for (String ele: list) {
@@ -143,28 +145,79 @@ public class Main {
 //        System.out.println(biFunction.apply(2, "Two"));
 //        BiConsumer<String, String> biConsumer = (s1, s2) -> System.out.println(s1 + " " + s2);
 //        biConsumer.accept("Naruto", "Uzumaki");
-
-        List<Student> students = new ArrayList<>(List.of(
-                                         new Student("Naruto", "CSE", 7.5),
-                                         new Student("Sasuke", "ECE", 9.5),
-                                         new Student("Kakashi", "ECE", 9.8),
-                                         new Student("Itachi", "CSE", 9.8)));
-
-        System.out.println(students.stream().anyMatch(student -> student.getGrade() > 9.0));
-        System.out.println(students.stream().allMatch(student -> student.getGrade() > 9.0));
-        System.out.println(students.stream().noneMatch(student -> student.getGrade() < 7.0));
-
-        Comparator<Student> comparingByGPAIncreasing = Comparator.comparing(Student::getGrade);
-        Comparator<Student> comparingByGPADecreasing = Comparator.comparing(Student::getGrade).reversed();
-        Comparator<Student> comparingByGpaAndName = Comparator.comparing(Student::getGrade).thenComparing(Student::getName);
-
-        Collections.sort(students, comparingByGPAIncreasing);
-        System.out.println(students);
-
-        System.out.println(students.stream().sorted(comparingByGPAIncreasing).collect(Collectors.toList()));
-        System.out.println(students.stream().sorted(comparingByGPADecreasing).collect(Collectors.toList()));
-        System.out.println(students.stream().sorted(comparingByGpaAndName).collect(Collectors.toList()));
-
+//
+//        List<Student> students = new ArrayList<>(List.of(
+//                                         new Student("Naruto", "CSE", 7.5),
+//                                         new Student("Sasuke", "ECE", 9.5),
+//                                         new Student("Kakashi", "ECE", 9.8),
+//                                         new Student("Itachi", "CSE", 9.8)));
+//
+//        System.out.println(students.stream().anyMatch(student -> student.getGrade() > 9.0));
+//        System.out.println(students.stream().allMatch(student -> student.getGrade() > 9.0));
+//        System.out.println(students.stream().noneMatch(student -> student.getGrade() < 7.0));
+//
+//        Comparator<Student> comparingByGPAIncreasing = Comparator.comparing(Student::getGrade);
+//        Comparator<Student> comparingByGPADecreasing = Comparator.comparing(Student::getGrade).reversed();
+//        Comparator<Student> comparingByGpaAndName = Comparator.comparing(Student::getGrade).thenComparing(Student::getName);
+//
+//        Collections.sort(students, comparingByGPAIncreasing);
+//        System.out.println(students);
+//
+//        System.out.println(students.stream().sorted(comparingByGPAIncreasing).collect(Collectors.toList()));
+//        System.out.println(students.stream().sorted(comparingByGPADecreasing).collect(Collectors.toList()));
+//        System.out.println(students.stream().sorted(comparingByGpaAndName).collect(Collectors.toList()));
+//
+//        System.out.println(students.stream().limit(2).collect(Collectors.toList()));
+//        System.out.println(students.stream().skip(2).collect(Collectors.toList()));
+//
+//        System.out.println(students);
+//        System.out.println(students.stream().takeWhile(student -> student.getGrade() != 9.5).collect(Collectors.toList()));
+//        System.out.println(students.stream().dropWhile(student -> student.getGrade() != 9.5).collect(Collectors.toList()));
+//
+//        System.out.println(students.stream().max(comparingByGpaAndName));
+//
+//        System.out.println(IntStream.range(1, 10).sum());
+//        System.out.println(IntStream.rangeClosed(1, 10).sum());
+//        System.out.println(IntStream.iterate(2, n -> n + 2).limit(10).peek(n -> System.out.print(n + " ")).sum());
+//        List<Integer> integers = IntStream.iterate(2, n -> n + 2).limit(10).boxed().collect(Collectors.toList());
+//        System.out.println(integers);
+//        System.out.println(IntStream.rangeClosed(1, 20).reduce(1, (x,y) -> x*y));
+//        System.out.println(LongStream.rangeClosed(1, 20).reduce(1L, (x,y) -> x*y));
+//        System.out.println(LongStream.rangeClosed(1, 50).reduce(1L, (x,y) -> x*y));
+//        System.out.println(LongStream.rangeClosed(1, 50)
+//                                      .mapToObj(BigInteger::valueOf)
+//                                      .reduce(BigInteger.ONE, BigInteger::multiply));
+//        List<String> strings = List.of("Spring", "Spring Boot", "Java", "C++", "Docker", "Github");
+//        String res = strings.stream().collect(Collectors.joining(","));
+//        System.out.println(res);
+//        System.out.println(strings.stream().map(string -> string.split("")).collect(Collectors.toList()));
+//        System.out.println(strings.stream().map(string -> string.split(""))
+//                                           .flatMap(Arrays::stream)
+//                                           .collect(Collectors.toList()));
+//        List<String> strings2 = List.of("Spring", "Spring Boot", "Java", "C++", "Docker", "Github");
+//        System.out.println(strings.stream()
+//                .flatMap(string -> strings2.stream().map(string2 -> List.of(string, string2)))
+//                .collect(Collectors.toList()));
+//        System.out.println(strings.stream()
+//                .flatMap(string -> strings2.stream().map(string2 -> List.of(string, string2)))
+//                .filter(list -> !list.get(0).equals(list.get(1)) && list.get(0).length() == list.get(1).length())
+//                .collect(Collectors.toList()));
+//
+//        long startTime = System.currentTimeMillis();
+//        System.out.println(LongStream.range(0, 100000000).sum()); // Took avg of 220 milliseconds
+//        System.out.println(LongStream.range(0, 100000000).parallel().sum()); // Took avg of 50 milliseconds
+//        long endTime = System.currentTimeMillis();
+//        System.out.println(endTime - startTime);
+//        List<String> courses = new ArrayList<>(strings2);
+//        courses.replaceAll(String::toUpperCase);
+//        courses.removeIf(str -> str.contains("C++"));
+//        System.out.println(courses);
+        Files.lines(Paths.get("./resources/data.txt"))
+                .map(line -> line.split(" "))
+                .flatMap(Arrays::stream)
+                .distinct()
+                .sorted()
+                .forEach(System.out::println);
     }
 
     private static Predicate<Integer> getIntegerPredicate() {
@@ -172,7 +225,7 @@ public class Main {
     }
 
     private static boolean isEven(int n) {
-        return  n % 2 == 0;
+        return n % 2 == 0;
     }
 
     public static void printNumber(Integer num) {
